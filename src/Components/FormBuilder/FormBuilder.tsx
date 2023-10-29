@@ -19,7 +19,7 @@ interface FormSectionProps {
  */
 interface FormProps {
   formSection?: FormSectionProps[]
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
+  onSubmit?: () => void
   onCancel?: () => void
 }
 
