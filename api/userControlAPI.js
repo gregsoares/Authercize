@@ -29,11 +29,17 @@ app.post('/register', (req, res) => {
   const { email, password } = req.body
   // Check if the email is already taken
   if (users.some(user => user.email === email)) {
-    return res.status(400).json({ message: 'email is already taken' })
+    return res
+      .status(400)
+      .json({ status: 400, message: 'Email is already taken' })
+  }
+  //check that password isn't invalid
+  if (!password.length) {
+    return res.status(400).json({ status: 400, message: 'Password is invalid' })
   }
   const newUser = { email, password }
   users.push(newUser)
-  res.status(201).json({ message: 'User registered successfully' })
+  res.status(201).json({ status: 200, message: 'User registered successfully' })
 })
 
 // Endpoint for user login

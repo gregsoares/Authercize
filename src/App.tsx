@@ -1,30 +1,17 @@
-import { useState } from 'react'
 import Login from './Components/Login'
 import Register from './Components/Register'
 import UsersTable from './Components/UsersTable'
-import { fetchAllUsers } from './utils/userControls'
-import { UserT } from './types'
-
+import { useStore } from 'effector-react'
+import { $users } from './store'
 function App() {
-  const [users, setUsers] = useState<UserT[]>([])
-  const showAllUsers = async () => {
-    fetchAllUsers().then(allUsers => {
-      setUsers(allUsers === undefined ? [] : [...allUsers!])
-    })
-  }
+  const users = useStore($users)
 
   return (
-    <div className='bg-black'>
+    <main>
       <UsersTable users={users} />
-      <button
-        className='p-2 bg-green-500 text-white font-semibold rounded'
-        onClick={showAllUsers}
-      >
-        Show All Users
-      </button>
       <Login />
       <Register />
-    </div>
+    </main>
   )
 }
 
