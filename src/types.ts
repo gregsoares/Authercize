@@ -1,13 +1,23 @@
-export type UserT = {
+export type UserCredentialsT = {
   email: string
   password: string
 }
 
-export type UsersTablePropsT = {
-  users: UserT[]
+export interface UserI {
+  UUID?: string
+  email: string
+  type?: string
+  isLoggedIn?: boolean
+  accessToken?: string
 }
 
-export type ApiResponseT = UserT[]
-export type ApiErrorT = {
-  message: string
+export type UserT = {
+  UUID: string
+  type: string
+  isLoggedIn?: boolean
+  accessToken: string
+}
+
+export type UsersTablePropsT = {
+  users: UserI[]
 }

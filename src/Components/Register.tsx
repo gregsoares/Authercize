@@ -1,25 +1,20 @@
-// Register.tsx
-
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { registerUser } from '../utils/userControls'
 
 const Register: React.FC = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
-    fetch('http://localhost:3000/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        setEmail('')
-        setPassword('')
-      })
-      .catch(err => console.log(err))
+    const registrationStatus = await registerUser(email, password)
+    if (registrationStatus === void 0 || !registrationStatus) {
+      return
+    }
+    setEmail('')
+    setPassword('')
+    console.debug('registrationStatus', registrationStatus)
+    return
   }
 
   return (
