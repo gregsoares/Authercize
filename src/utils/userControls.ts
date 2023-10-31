@@ -1,11 +1,15 @@
-import { ApiErrorT } from '../types'
 import { addUser } from '../store'
+
+type ApiResponseT = {
+  status?: number
+  message?: string
+}
 
 export const fetchAllUsers = (): Promise<void> =>
   fetch('http://localhost:3000/users')
     .then(data => data.json())
     .catch(err => {
-      const error: ApiErrorT = { status: 400, ...err }
+      const error: ApiResponseT = { status: 400, ...err }
       return error
     })
 
@@ -19,7 +23,7 @@ export const loginAuth = (email: string, password: string): Promise<void> => {
     .then(res => res.json())
     .then(data => data)
     .catch(err => {
-      const error: ApiErrorT = { message: err.message }
+      const error: ApiResponseT = { message: err.message }
       return error
     })
 }
@@ -27,10 +31,10 @@ export const loginAuth = (email: string, password: string): Promise<void> => {
 export const registerUser = (
   email: string = '',
   password: string = ''
-): Promise<void> => {
+): Promise<ApiResponseT> => {
   const data = { email, password }
   if (!email || !password) {
-    const error: ApiErrorT = { message: 'Email and password required' }
+    const error: ApiResponseT = { message: 'Email and password required' }
     return Promise.reject({ status: 400, error })
   }
   return fetch('http://localhost:3000/register', {
