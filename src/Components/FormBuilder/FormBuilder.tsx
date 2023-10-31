@@ -19,8 +19,8 @@ interface FormSectionProps {
  */
 interface FormProps {
   formSection?: FormSectionProps[]
-  onSubmit?: () => void
-  onCancel?: () => void
+  onSubmit?: (e: React.FormEvent) => void
+  onCancel?: (e: React.FormEvent) => void
 }
 
 const Form: React.FC<FormProps> = ({ formSection, onSubmit, onCancel }) => {

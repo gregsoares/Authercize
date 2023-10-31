@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { registerUser } from '../utils/userControls'
 
 const Register: React.FC = () => {
@@ -14,7 +14,6 @@ const Register: React.FC = () => {
     setEmail('')
     setPassword('')
     console.debug('registrationStatus', registrationStatus)
-    return
   }
 
   return (
