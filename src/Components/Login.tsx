@@ -6,12 +6,20 @@ import TextInput from './TextInput/TextInput'
 import Form from './FormBuilder/FormBuilder'
 import { loginAuth } from '../utils/userControls'
 
-const Login: React.FC = () => {
+type Props = {
+  displayForm: boolean | null
+}
+
+const Login: React.FC<Props> = props => {
+  const { displayForm } = props
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
+  if (!displayForm) {
+    return null
+  }
+
+  const handleLogin = () => {
     loginAuth(email, password)
       .then(res => {
         console.debug(res)
@@ -31,17 +39,18 @@ const Login: React.FC = () => {
       onCancel={handleCancelForm}
       formSection={[
         {
-          Label: <Label text='Email' size='text-2xl' />,
+          Label: <Label text='Email' />,
           Input: (
             <TextInput
               text={email}
               onChange={e => setEmail(e.target.value)}
               placeholder='Login@Email.com'
+              type='email'
             />
           ),
         },
         {
-          Label: <Label text='Password' size='text-2xl' />,
+          Label: <Label text='Password' />,
           Input: (
             <TextInput
               text={password}

@@ -32,9 +32,11 @@ const TextInput: React.FC<InputProps> = ({
   size,
   type,
 }) => {
+  size = size || '1rem'
+
   return (
     <input
-      className='w-full p-2 border rounded'
+      className='text-input'
       type={type}
       value={text}
       onChange={onChange}

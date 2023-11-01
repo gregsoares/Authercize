@@ -1,6 +1,9 @@
 /* styles.css (or a separate CSS file in your project) */
 
 .custom-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #333;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -16,10 +19,16 @@
 
 .label {
   color: #ddd;
-  margin: 0.5em 0.7em;
+  padding: 0.2em;
+  margin: 0.5em 1em 0.5em 0.5em;
 }
 
-/* Styling for Input elements can be added here */
+.text-input {
+  margin: 0.5em 1em;
+  padding: 0.8em;
+  border: none;
+  border-radius: 0.25rem;
+}
 
 .submit-button {
   margin: 1em 1.2em;

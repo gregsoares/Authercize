@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import { registerUser } from '../utils/userControls'
 
-const Register: React.FC = () => {
+type Props = {
+  displayForm: boolean | null
+}
+
+const Register: React.FC<Props> = props => {
+  const { displayForm } = props
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  if (!displayForm) {
+    return null
+  }
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
