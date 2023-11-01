@@ -1,5 +1,10 @@
 import { addUser } from '../store'
 
+type ApiResponseT = {
+  status?: number
+  message?: string
+}
+
 export const fetchAllUsers = (): Promise<void> =>
   fetch('http://localhost:3000/users')
     .then(data => data.json())
@@ -26,7 +31,7 @@ export const loginAuth = (email: string, password: string): Promise<void> => {
 export const registerUser = (
   email: string = '',
   password: string = ''
-): Promise<void> => {
+): Promise<ApiResponseT> => {
   const data = { email, password }
   if (!email || !password) {
     return Promise.reject({

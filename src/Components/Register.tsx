@@ -23,7 +23,6 @@ const Register: React.FC<Props> = props => {
     setEmail('')
     setPassword('')
     console.debug('registrationStatus', registrationStatus)
-    return
   }
 
   return (

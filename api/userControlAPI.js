@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 // Middleware to parse JSON request bodies
 app.use(bodyParser.json())
 
+// TODO: connect Store's UUID to user's ID in database, so that we can track which user is using which store and which store is being used by which user
 // Create a simple in-memory database for users
 const users = []
 const deletedUsers = []
