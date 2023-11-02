@@ -1,12 +1,14 @@
 import { addUser } from '../store'
 
+const apiUrl = process.env.HOST || `http://localhost:${process.env.PORT}`
+
 type ApiResponseT = {
   status?: number
   message?: string
 }
 
 export const fetchAllUsers = (): Promise<void> =>
-  fetch('http://localhost:3000/users')
+  fetch(`${apiUrl}/users`)
     .then(data => data.json())
     .catch(err => {
       return { status: 400, ...err }
@@ -14,7 +16,7 @@ export const fetchAllUsers = (): Promise<void> =>
 
 export const loginAuth = (email: string, password: string): Promise<void> => {
   const data = { email, password }
-  return fetch('http://localhost:3000/login', {
+  return fetch(`${apiUrl}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -39,7 +41,7 @@ export const registerUser = (
       message: 'Email and password required',
     })
   }
-  return fetch('http://localhost:3000/register', {
+  return fetch(`${apiUrl}/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
