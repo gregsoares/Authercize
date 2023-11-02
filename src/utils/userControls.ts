@@ -1,9 +1,16 @@
 import { addUser } from '../store'
 
-const apiUrl =
-  process.env.NODE_ENV !== 'development'
-    ? `https://authercize.vercel.app:9012/api/userControlAPI`
-    : `http://localhost:9012/api`
+let apiUrl: string
+switch (process.env.NODE_ENV) {
+  case 'development':
+    apiUrl = `http://localhost:9012/api/userControlAPI`
+    break
+  case 'preview':
+    apiUrl = `https://authercize-git-preview-gregsoares.vercel.app:9012/api/userControlAPI`
+    break
+  default:
+    apiUrl = `http://localhost:9012/api/userControlAPI`
+}
 
 type ApiResponseT = {
   status?: number
