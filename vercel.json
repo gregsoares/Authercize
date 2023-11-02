@@ -2,12 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "/api/userControlAPI.js"
+      "src": "/api/userControlAPI.js",
+      "dest": "/api/*"
     }
-  ],
-  "functions": {
-    "api/*": {
-      "handler": ["src/api/userControlAPI.js"]
-    }
-  }
+  ]
 }
