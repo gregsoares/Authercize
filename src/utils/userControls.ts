@@ -1,6 +1,13 @@
 import { addUser } from '../store'
 
-let apiUrl: string = `http://authercize-git-preview-gregsoares.vercel.app:9021/api`
+const isDeployed =
+  process.env.VERCEL_ENV === 'production' ||
+  process.env.VERCEL_ENV === 'preview'
+const host = isDeployed
+  ? 'authercize-git-preview-gregsoares.vercel.app'
+  : 'localhost'
+
+let apiUrl: string = `http://${host}:9021/api`
 
 type ApiResponseT = {
   status?: number
