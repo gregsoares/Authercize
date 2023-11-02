@@ -2,7 +2,8 @@ import { addUser } from '../store'
 
 const isDeployed =
   process.env.VERCEL_ENV === 'production' ||
-  process.env.VERCEL_ENV === 'preview'
+  process.env.VERCEL_ENV === 'preview' ||
+  process.env.VERCEL_ENV === 'main'
 const host = isDeployed
   ? 'authercize-git-preview-gregsoares.vercel.app'
   : 'localhost'
