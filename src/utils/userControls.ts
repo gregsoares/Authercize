@@ -7,7 +7,7 @@ const host = isDeployed
   ? 'authercize-git-preview-gregsoares.vercel.app'
   : 'localhost'
 
-let apiUrl: string = `http://${host}:9021/api`
+let apiUrl: string = `https://${host}:9021/api`
 
 type ApiResponseT = {
   status?: number
