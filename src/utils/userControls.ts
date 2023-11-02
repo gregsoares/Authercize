@@ -1,6 +1,6 @@
 import { addUser } from '../store'
 
-let apiUrl: string = `http://${process.env.HOST}:${process.env.PORT}/api/userControlAPI`
+let apiUrl: string = `http://authercize-git-preview-gregsoares.vercel.app:9021/api`
 
 type ApiResponseT = {
   status?: number
