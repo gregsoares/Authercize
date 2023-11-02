@@ -2,8 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "/api/userControlAPI.js",
-      "use": "@vercel/node"
+      "src": "/api/*.js",
+      "use": "@"
     }
   ],
   "routes": [
