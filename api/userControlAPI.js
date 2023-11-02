@@ -4,11 +4,6 @@ import bodyParser from 'body-parser'
 
 // Create an Express application
 const app = express()
-const env = process.env.NODE_ENV || 'development'
-if (env === 'development') {
-  process.env.HOST = 'localhost'
-  process.env.PORT = 9012
-}
 
 // Enable CORS to allow cross-origin requests
 app.use((req, res, next) => {
@@ -88,7 +83,8 @@ app.delete('/removeUser/:email', (req, res) => {
     .json({ message: 'User removed and added to deleted accounts' })
 })
 
+const port = process.env.PORT || 9021
 // Start the server
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`)
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
 })

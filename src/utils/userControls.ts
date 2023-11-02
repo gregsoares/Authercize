@@ -1,7 +1,7 @@
 import { addUser } from '../store'
 
 let apiUrl: string
-switch (process.env.NODE_ENV) {
+switch (process.env.VERCEL_ENV) {
   case 'development':
     apiUrl = `http://localhost:9012/api/userControlAPI`
     break
