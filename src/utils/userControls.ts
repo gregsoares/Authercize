@@ -4,25 +4,26 @@ const isDeployed =
   process.env.VERCEL_ENV === 'production' ||
   process.env.VERCEL_ENV === 'preview' ||
   process.env.VERCEL_ENV === 'main'
-const host = isDeployed
-  ? 'authercize-git-preview-gregsoares.vercel.app'
-  : 'localhost'
+const host = isDeployed ? 'authercize.vercel.app' : 'localhost'
 
-let apiUrl: string = `https://${host}:9021/api`
+const apiUrl = `https://${host}:9021/api`
 
 type ApiResponseT = {
   status?: number
   message?: string
 }
 
-export const fetchAllUsers = (): Promise<void> =>
+export const fetchAllUsers = (): Promise<ApiResponseT> =>
   fetch(`${apiUrl}/users`)
     .then(data => data.json())
-    .catch(err => {
-      return { status: 400, ...err }
-    })
+    .then(data => ({ status: 200, data }))
+    .catch(err => ({ status: 400, message: err.message })
+    }) as Promise<ApiResponseT>
 
-export const loginAuth = (email: string, password: string): Promise<void> => {
+export const loginAuth = (
+  email: string,
+  password: string
+): Promise<ApiResponseT> => {
   const data = { email, password }
   return fetch(`${apiUrl}/login`, {
     method: 'POST',

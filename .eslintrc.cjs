@@ -18,6 +18,7 @@ module.exports = {
     project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
+  include: ['./api/*'],
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': [
