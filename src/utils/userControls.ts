@@ -19,10 +19,7 @@ export const fetchAllUsers = (): Promise<ApiResponseT> =>
     .then(data => ({ status: 200, data }))
     .catch(err => ({ status: 400, message: err.message }))
 
-export const loginAuth = (
-  email: string,
-  password: string
-): Promise<ApiResponseT> => {
+export const loginAuth = (email: '', password: ''): Promise<ApiResponseT> => {
   const data = { email, password }
   return fetch(`${apiUrl}/login`, {
     method: 'POST',
@@ -38,10 +35,7 @@ export const loginAuth = (
     })
 }
 
-export const registerUser = (
-  email: string = '',
-  password: string = ''
-): Promise<ApiResponseT> => {
+export const registerUser = (email = '', password = '') => {
   const data = { email, password }
   if (!email || !password) {
     return Promise.reject({
@@ -62,7 +56,7 @@ export const registerUser = (
       }
       addUser({
         UUID: Math.random().toString(36).substring(7),
-        email: email,
+        email,
         type: 'user',
         isLoggedIn: false,
         accessToken: 'SomeRandom alphanumeric string',
