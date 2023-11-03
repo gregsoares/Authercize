@@ -17,8 +17,7 @@ export const fetchAllUsers = (): Promise<ApiResponseT> =>
   fetch(`${apiUrl}/users`)
     .then(data => data.json())
     .then(data => ({ status: 200, data }))
-    .catch(err => ({ status: 400, message: err.message })
-    })
+    .catch(err => ({ status: 400, message: err.message }))
 
 export const loginAuth = (
   email: string,
