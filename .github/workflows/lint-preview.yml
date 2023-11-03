@@ -1,0 +1,26 @@
+name: Lint Preview Branch
+
+on:
+  pull_request:
+    branches:
+      - preview
+  push:
+    branches:
+      - preview
+  workflow_dispatch:
+
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: 'preview'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
