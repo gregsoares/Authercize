@@ -8,7 +8,7 @@ type InputProps = {
   /**
    * text: string = The text to be displayed in the input
    */
-  text?: string
+  text?: string | ''
   /**
    * onChange: (event: ChangeEvent<HTMLInputElement>) => void = The function to be called when the input is changed
    */

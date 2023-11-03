@@ -1,7 +1,7 @@
-import { Button } from '../stories/Button'
-import type { UserI, UsersTablePropsT } from '../types'
+import { Button } from '../../stories/Button'
+import type { UserI, UsersTablePropsT } from '../../types'
 import { useStore } from 'effector-react'
-import { $users } from '../store'
+import { $users } from '../../store'
 
 const UsersTable = (props: UsersTablePropsT) => {
   const { users } = props
@@ -17,7 +17,6 @@ const UsersTable = (props: UsersTablePropsT) => {
 
   return (
     <div className='my-16'>
-      {/* make a padded section with a button to display Users */}
       <h2 className='text-2xl font-semibold mb-4'>Users</h2>
       <table className='w-full border border-collapse border-gray-300'>
         <thead>

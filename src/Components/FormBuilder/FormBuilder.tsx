@@ -25,7 +25,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ formSection, onSubmit, onCancel }) => {
   return (
-    <div className='custom-form'>
+    <div className='custom-form' data-testid='login-form'>
       <form>
         {formSection?.map((section, index) => (
           <div key={index} className='form-group'>
@@ -34,11 +34,16 @@ const Form: React.FC<FormProps> = ({ formSection, onSubmit, onCancel }) => {
           </div>
         ))}
 
-        <div className='flex justify-end'>
+        <div data-testid='login-button' className='flex justify-end'>
           <button className='submit-button' type='submit' onClick={onSubmit}>
             Submit
           </button>
-          <button className='cancel-button' type='button' onClick={onCancel}>
+          <button
+            data-testid='cancel-button'
+            className='cancel-button'
+            type='button'
+            onClick={onCancel}
+          >
             Cancel
           </button>
         </div>
