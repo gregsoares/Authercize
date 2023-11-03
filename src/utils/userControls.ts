@@ -6,7 +6,7 @@ const isDeployed =
   process.env.VERCEL_ENV === 'main'
 const host = isDeployed ? 'authercize.vercel.app' : 'localhost'
 
-const apiUrl = `https://${host}:9021/api`
+let apiUrl: string = `https://${host}:9021/api`
 
 type ApiResponseT = {
   status?: number
@@ -18,7 +18,7 @@ export const fetchAllUsers = (): Promise<ApiResponseT> =>
     .then(data => data.json())
     .then(data => ({ status: 200, data }))
     .catch(err => ({ status: 400, message: err.message })
-    }) as Promise<ApiResponseT>
+    })
 
 export const loginAuth = (
   email: string,
