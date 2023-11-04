@@ -1,7 +1,8 @@
 import { Signal } from '@preact/signals-react'
+import { staticUserList, staticUserSecretList } from './constants/userList.js'
 
 type UserSecretT = { UUID: string; email: string; password: string }
-const userSecret: UserSecretT[] = []
+const userSecret: UserSecretT[] = [...staticUserSecretList]
 
 type UserT = {
   UUID: string
@@ -11,8 +12,12 @@ type UserT = {
   accessToken?: string
 }
 
-const userList: UserT[] = []
+const userList: UserT[] = [...staticUserList]
 const state = new Signal(userList)
+
+export const showLoginForm = new Signal(false)
+export const showRegisterForm = new Signal(false)
+export const loggedInUser = new Signal(userList.find(users => users.isLoggedIn))
 
 export const users = {
   subscribe: state.subscribe,
@@ -41,5 +46,9 @@ export const users = {
   },
   getUserSecretList: () => {
     return userSecret
+  },
+  updateIsLoggedIn: (UUID: string, isLoggedIn: boolean) => {
+    const index = userList.findIndex(user => user.UUID === UUID)
+    userList[index].isLoggedIn = isLoggedIn
   },
 }

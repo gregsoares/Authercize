@@ -3,20 +3,14 @@ import Label from '../Label/Label'
 import TextInput from '../TextInput/TextInput'
 import Form from '../FormBuilder/FormBuilder'
 import { login } from '../../utils/userControls'
-
-type Props = {
-  displayForm: boolean | null
-  handleLogin?: () => void
-  handleCancelForm?: () => void
-}
+import { showLoginForm } from '../../store'
 
 type emailT = '' | string
-const Login: React.FC<Props> = props => {
+const Login: React.FC = () => {
   const [email, setEmail] = useState<emailT>('')
   const [password, setPassword] = useState<string>('')
-  const { displayForm } = props
 
-  if (!displayForm) {
+  if (!showLoginForm.value) {
     return null
   }
 
@@ -25,7 +19,7 @@ const Login: React.FC<Props> = props => {
     const loginResponse = login(email, password)
     console.debug('loginResponse', loginResponse)
     if (!loginResponse.status || loginResponse.status < 400) {
-      setEmail('asd')
+      setEmail('')
       setPassword('')
       // TODO - Add toast notification
     }

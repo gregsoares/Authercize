@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import { registerUser } from '../../utils/userControls'
+import { showRegisterForm } from '../../store'
 
-type Props = {
-  displayForm: boolean | null
-}
-
-const Register: React.FC<Props> = props => {
-  const { displayForm } = props
+const Register: React.FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  if (!displayForm) {
+  if (!showRegisterForm.value) {
     return null
   }
 

@@ -20,8 +20,6 @@ export const fetchAllUsers = (): ApiResponseT => {
   }
 }
 
-//add type for login parameters as UserCredentialsT
-
 export const login = (email: string, password: string): ApiResponseT => {
   const user = users.getUserList().find(user => user.email === email)
   if (!user) {
@@ -38,12 +36,15 @@ export const login = (email: string, password: string): ApiResponseT => {
       message: 'Invalid password',
     }
   }
-  console.debug('user', user)
-  console.debug('userSecret', userSecret)
+  users.updateIsLoggedIn(UUID, true)
   return {
     status: 200,
     message: 'Login successful',
   }
+}
+
+export const logout = (UUID: string) => {
+  users.updateIsLoggedIn(UUID, false)
 }
 
 export const registerUser = (email = '', password = ''): ApiResponseT => {
