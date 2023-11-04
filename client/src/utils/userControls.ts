@@ -20,7 +20,9 @@ export const fetchAllUsers = (): ApiResponseT => {
   }
 }
 
-export const login = (email: '', password: ''): ApiResponseT => {
+//add type for login parameters as UserCredentialsT
+
+export const login = (email: string, password: string): ApiResponseT => {
   const user = users.getUserList().find(user => user.email === email)
   if (!user) {
     return {

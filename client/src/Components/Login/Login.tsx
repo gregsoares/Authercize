@@ -10,43 +10,9 @@ type Props = {
   handleCancelForm?: () => void
 }
 
-/**
- * `Label` Component
- * @module Label
- */
-
-/**
- * `TextInput` Component
- * @module TextInput
- */
-
-/**
- * `Form` Component
- * @module Form
- */
-
-/**
- * `Props` type definition
- * @typedef {Object} Props
- * @property {boolean | null} displayForm - Determines if the form should be displayed
- */
-
-/**
- * `FormStateT` type definition
- * @typedef {Object} FormStateT
- * @property {string} [email] - Email input value
- * @property {string} [password] - Password input value
- */
-
-/**
- * `Login` Component
- * @module Login
- * @param {Props} props - Props that get passed to the Login component
- * @returns {JSX.Element | null} The Login component
- */
-
+type emailT = '' | string
 const Login: React.FC<Props> = props => {
-  const [email, setEmail] = useState<string | undefined>(undefined)
+  const [email, setEmail] = useState<emailT>(() => 'asd')
   const [password, setPassword] = useState<string>('')
   const { displayForm } = props
 
@@ -58,8 +24,8 @@ const Login: React.FC<Props> = props => {
     e.preventDefault()
     const loginResponse = login(email, password)
     console.debug('loginResponse', loginResponse)
-    if (!loginResponse || loginResponse?.status < 400) {
-      setEmail('')
+    if (!loginResponse.status || loginResponse.status < 400) {
+      setEmail('asd')
       setPassword('')
       // TODO - Add toast notification
     }
