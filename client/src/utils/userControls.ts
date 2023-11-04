@@ -30,12 +30,12 @@ export const login = (email: '', password: ''): ApiResponseT => {
   }
   const { UUID } = user
   const userSecret = users.getUserSecretList().find(user => user.UUID === UUID)
-  // if (userSecret.password !== password) {
-  //   return {
-  //     status: 401,
-  //     message: 'Invalid password',
-  //   }
-  // }
+  if (userSecret?.password !== password) {
+    return {
+      status: 401,
+      message: 'Invalid password',
+    }
+  }
   console.debug('user', user)
   console.debug('userSecret', userSecret)
   return {
