@@ -12,7 +12,7 @@ type Props = {
 
 type emailT = '' | string
 const Login: React.FC<Props> = props => {
-  const [email, setEmail] = useState<emailT>(() => 'asd')
+  const [email, setEmail] = useState<emailT>('')
   const [password, setPassword] = useState<string>('')
   const { displayForm } = props
 
@@ -31,7 +31,10 @@ const Login: React.FC<Props> = props => {
     }
   }
 
-  const handleCancelForm = () => void 0
+  const handleCancelForm = () => {
+    setEmail('')
+    setPassword('')
+  }
   return (
     <Form
       onSubmit={handleLogin}
