@@ -23,12 +23,12 @@ app.use(bodyParser.json())
 const users = []
 const deletedUsers = []
 
-app.get('/api/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
 // Endpoint for user registration
-app.post('/api/register', (req, res) => {
+app.post('/register', (req, res) => {
   const { email, password } = req.body
   // Check if the email is already taken
   if (users.some(user => user.email === email)) {
@@ -46,7 +46,7 @@ app.post('/api/register', (req, res) => {
 })
 
 // Endpoint for user login
-app.post('/api/login', (req, res) => {
+app.post('/login', (req, res) => {
   const { email, password } = req.body
   // Check if the user exists and the password matches
   const user = users.find(
@@ -60,7 +60,7 @@ app.post('/api/login', (req, res) => {
 })
 
 // Endpoint to create a new user
-app.post('/api/createUser', (req, res) => {
+app.post('/createUser', (req, res) => {
   const { email, password } = req.body
   const newUser = { email, password }
   users.push(newUser)
@@ -68,12 +68,12 @@ app.post('/api/createUser', (req, res) => {
 })
 
 // Endpoint to get a list of all users
-app.get('/api/users', (req, res) => {
+app.get('/users', (req, res) => {
   res.status(200).json(users)
 })
 
 // Endpoint to remove a user and add to the list of deleted accounts
-app.delete('/api/removeUser/:email', (req, res) => {
+app.delete('/removeUser/:email', (req, res) => {
   const { email } = req.params
   const userIndex = users.findIndex(user => user.email === email)
   if (userIndex === -1) {
