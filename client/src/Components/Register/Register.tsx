@@ -1,15 +1,14 @@
 import { registerUser } from '../../utils/userControls'
-import { showRegisterForm } from '../../store'
+import { showRegisterForm, userLoggedIn } from '../../store'
 import { signal } from '@preact/signals-react'
 
 const email = signal('')
 const password = signal('')
 
 const Register: React.FC = () => {
-  if (!showRegisterForm.value) {
+  if (userLoggedIn.value || showRegisterForm.value) {
     return null
   }
-
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
     const registrationStatus = await registerUser(email.value, password.value)

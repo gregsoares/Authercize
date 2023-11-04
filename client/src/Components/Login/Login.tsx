@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import { useSignal } from '@preact/signals-react'
 import Label from '../Label/Label'
 import TextInput from '../TextInput/TextInput'
 import Form from '../FormBuilder/FormBuilder'
 import { login } from '../../utils/userControls'
-import { showLoginForm, userLoggedIn } from '../../store'
+import { showLoginForm } from '../../store'
 
-type emailT = '' | string
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<emailT>('williamjohnson@example.com')
-  const [password, setPassword] = useState<string>('1')
+  const email = useSignal('')
+  const password = useSignal('')
 
   if (!showLoginForm.value) {
     return null
@@ -16,11 +15,11 @@ const Login: React.FC = () => {
 
   const handleLogin = e => {
     e.preventDefault()
-    const loginResponse = login(email, password)
+    const loginResponse = login(email.value, password.value)
     console.debug('loginResponse', loginResponse)
     if (loginResponse.status === 200) {
-      setEmail('')
-      setPassword('')
+      email.value = ''
+      password.value = ''
       //rerender this component
       showLoginForm.value = false
     }
@@ -29,8 +28,8 @@ const Login: React.FC = () => {
     // TODO - Add toast notification
   }
   const handleCancelForm = () => {
-    setEmail('')
-    setPassword('')
+    email.value = ''
+    password.value = ''
   }
   return (
     <Form
@@ -41,8 +40,8 @@ const Login: React.FC = () => {
           Label: <Label text='Email' />,
           Input: (
             <TextInput
-              text={email}
-              onChange={e => setEmail(e.target.value)}
+              text={email.value}
+              onChange={e => (email.value = e.target.value)}
               placeholder='Login@Email.com'
               type='email'
             />
@@ -52,8 +51,8 @@ const Login: React.FC = () => {
           Label: <Label text='Password' />,
           Input: (
             <TextInput
-              text={password}
-              onChange={e => setPassword(e.target.value)}
+              text={password.value}
+              onChange={e => (password.value = e.target.value)}
               placeholder='Password'
             />
           ),
