@@ -1,6 +1,5 @@
 import ProfileList from '../Components/ProfileList/ProfileList.js'
 import staticProfileList from '../constants/staticProfileList.js'
-import './styles.css'
 
 const CardList = () => {
   return (
