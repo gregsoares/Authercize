@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import Label from '../Label/Label'
 import TextInput from '../TextInput/TextInput'
 import Form from '../FormBuilder/FormBuilder'
+import { login } from '../../utils/userControls'
 
 type Props = {
   displayForm: boolean | null
@@ -44,17 +46,23 @@ type Props = {
  */
 
 const Login: React.FC<Props> = props => {
+  const [email, setEmail] = useState<string | undefined>(undefined)
+  const [password, setPassword] = useState<string>('')
   const { displayForm } = props
 
   if (!displayForm) {
     return null
   }
 
-  const handleLogin = () => {
-    console.debug(
-      '%cEvent:Click: handleLogin',
-      'backgroundColor: grey, color: green '
-    )
+  const handleLogin = e => {
+    e.preventDefault()
+    const loginResponse = login(email, password)
+    console.debug('loginResponse', loginResponse)
+    if (!loginResponse || loginResponse?.status < 400) {
+      setEmail('')
+      setPassword('')
+      // TODO - Add toast notification
+    }
   }
 
   const handleCancelForm = () => void 0
@@ -67,14 +75,8 @@ const Login: React.FC<Props> = props => {
           Label: <Label text='Email' />,
           Input: (
             <TextInput
-              text={''}
-              onChange={e => {
-                console.debug(
-                  '%cEvent:Click',
-                  'backgroundColor: grey, color: green ',
-                  e
-                )
-              }}
+              text={email}
+              onChange={e => setEmail(e.target.value)}
               placeholder='Login@Email.com'
               type='email'
             />
@@ -84,14 +86,8 @@ const Login: React.FC<Props> = props => {
           Label: <Label text='Password' />,
           Input: (
             <TextInput
-              text={''}
-              onChange={e => {
-                console.debug(
-                  '%cEvent:Click',
-                  'backgroundColor: grey, color: green ',
-                  e.target.value
-                )
-              }}
+              text={password}
+              onChange={e => setPassword(e.target.value)}
               placeholder='Password'
             />
           ),

@@ -1,8 +1,6 @@
 import React from 'react'
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
-import { useStore } from 'effector-react'
-import { $users } from './store'
 import './App.css'
 import { fetchAllUsers } from './utils/userControls'
 
@@ -35,22 +33,11 @@ function App() {
     },
     {
       title: 'Users',
-      handleClick: async () => {
+      handleClick: () => {
         fetchAllUsers()
-          .then(res => {
-            console.log('Users: ', res)
-            //add users to users store
-          })
-          .catch(err => {
-            console.log('Error: ', err)
-          })
       },
     },
   ]
-
-  const users = useStore($users)
-
-  console.debug('current users store: \n', users)
 
   return (
     <div className='App'>

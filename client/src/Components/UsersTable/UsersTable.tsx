@@ -1,19 +1,11 @@
 import type { UserI, UsersTablePropsT } from '../../types'
-import { useStore } from 'effector-react'
-import { $users } from '../../store'
 
 const UsersTable = (props: UsersTablePropsT) => {
   const { users } = props
-  const usersFromStore = useStore($users)
 
   console.debug('view::UsersTable::users', users)
   const checkUserStore = () => {
-    console.debug(
-      'view::UsersTable::checkUserStore::usersFromStore',
-      usersFromStore
-    )
-  }
-
+ 
   return (
     <div className='my-16'>
       <h2 className='text-2xl font-semibold mb-4'>Users</h2>

@@ -1,8 +1,45 @@
-//create effector store to keep user state,user UUID, if loggedIn, type of user, access token;
-import { createStore, createEvent } from 'effector'
-import { UserI } from './types'
+import { Signal } from '@preact/signals-react'
 
-export const addUser = createEvent<UserI>()
+type UserSecretT = { UUID: string; email: string; password: string }
+const userSecret: UserSecretT[] = []
 
-export const $users = createStore<UserI[]>([])
-$users.on(addUser, (state, payload) => [...state, payload])
+type UserT = {
+  UUID: string
+  email: string
+  type?: string
+  isLoggedIn?: boolean
+  accessToken?: string
+}
+
+const userList: UserT[] = []
+const state = new Signal(userList)
+
+export const users = {
+  subscribe: state.subscribe,
+  addUser: (user: UserT) => {
+    userList.push(user)
+  },
+  removeUser: (UUID: string) => {
+    const index = userList.findIndex(user => user.UUID === UUID)
+    userList.splice(index, 1)
+  },
+  getUser: (UUID: string) => {
+    return userList.find(user => user.UUID === UUID)
+  },
+  getUserList: () => {
+    return userList
+  },
+  getUserSecret: (UUID: string) => {
+    return userSecret.find(user => user.UUID === UUID)
+  },
+  addUserSecret: (user: UserSecretT) => {
+    userSecret.push(user)
+  },
+  removeUserSecret: (UUID: string) => {
+    const index = userSecret.findIndex(user => user.UUID === UUID)
+    userSecret.splice(index, 1)
+  },
+  getUserSecretList: () => {
+    return userSecret
+  },
+}

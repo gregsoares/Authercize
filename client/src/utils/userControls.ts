@@ -1,63 +1,73 @@
-import { addUser } from '../store'
+import { users } from '../store'
 
-const apiUrl = 'http://localhost:9021/api'
+// const apiUrl = 'http://api.vercel.com/v9/api'
+
+const { addUser, addUserSecret } = users
 
 type ApiResponseT = {
   status?: number
   message?: string
 }
 
-export const fetchAllUsers = (): Promise<ApiResponseT> =>
-  fetch(`${apiUrl}/users`)
-    .then(data => data.json())
-    .then(data => ({ status: 200, data }))
-    .catch(err => ({ status: 400, message: err.message }))
-
-export const loginAuth = (email: '', password: ''): Promise<ApiResponseT> => {
-  const data = { email, password }
-  return fetch(`${apiUrl}/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  })
-    .then(res => res.json())
-    .then(data => {
-      return data
-    })
-    .catch(err => {
-      return { message: err.message }
-    })
+export const fetchAllUsers = (): ApiResponseT => {
+  const allUsers = users.getUserList()
+  const allUserSecrets = users.getUserSecretList()
+  console.debug('allUsers', allUsers)
+  console.debug('allUserSecrets', allUserSecrets)
+  return {
+    status: 200,
+    message: 'All users returned',
+  }
 }
 
-export const registerUser = (email = '', password = '') => {
-  const data = { email, password }
+export const login = (email: '', password: ''): ApiResponseT => {
+  const user = users.getUserList().find(user => user.email === email)
+  if (!user) {
+    return {
+      status: 404,
+      message: 'User not found',
+    }
+  }
+  const { UUID } = user
+  const userSecret = users.getUserSecretList().find(user => user.UUID === UUID)
+  // if (userSecret.password !== password) {
+  //   return {
+  //     status: 401,
+  //     message: 'Invalid password',
+  //   }
+  // }
+  console.debug('user', user)
+  console.debug('userSecret', userSecret)
+  return {
+    status: 200,
+    message: 'Login successful',
+  }
+}
+
+export const registerUser = (email = '', password = ''): ApiResponseT => {
   if (!email || !password) {
-    return Promise.reject({
+    return {
       status: 400,
       message: 'Email and password required',
-    })
+    }
   }
-  return fetch(`${apiUrl}/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+  const UUID = Math.random().toString(36).substring(7)
+  addUser({
+    UUID,
+    email,
+    type: 'user',
+    isLoggedIn: false,
+    accessToken: Math.random().toString(36).substring(7),
   })
-    .then(res => res.json())
-    .then(data => {
-      console.debug('addinG user to store: ', data)
-      if (data.status === 400 || !data.status) {
-        return data
-      }
-      addUser({
-        UUID: Math.random().toString(36).substring(7),
-        email,
-        type: 'user',
-        isLoggedIn: false,
-        accessToken: 'SomeRandom alphanumeric string',
-      })
-      return data
-    })
-    .catch(err => {
-      return { status: 400, err }
-    })
+  addUserSecret({
+    UUID,
+    email,
+    password,
+  })
+  console.debug('users', users.getUserList())
+  console.debug('userSecrets', users.getUserSecretList())
+  return {
+    status: 200,
+    message: 'User created',
+  }
 }
