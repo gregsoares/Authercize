@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { registerUser } from '../../../../src/utils/userControls'
+import { registerUser } from '../../utils/userControls'
 
 type Props = {
   displayForm: boolean | null

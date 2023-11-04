@@ -1,12 +1,6 @@
 import { addUser } from '../store'
 
-const isDeployed =
-  process.env.VERCEL_ENV === 'production' ||
-  process.env.VERCEL_ENV === 'preview' ||
-  process.env.VERCEL_ENV === 'main'
-const host = isDeployed ? 'authercize.vercel.app' : 'localhost'
-
-let apiUrl: string = `https://${host}:9021/api`
+const apiUrl = 'http://localhost:9021/api'
 
 type ApiResponseT = {
   status?: number
