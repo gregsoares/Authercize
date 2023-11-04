@@ -1,15 +1,14 @@
-import { useState, useReducer } from 'react'
+import { useState } from 'react'
 import Label from '../Label/Label'
 import TextInput from '../TextInput/TextInput'
 import Form from '../FormBuilder/FormBuilder'
 import { login } from '../../utils/userControls'
-import { showLoginForm } from '../../store'
+import { showLoginForm, userLoggedIn } from '../../store'
 
 type emailT = '' | string
 const Login: React.FC = () => {
   const [email, setEmail] = useState<emailT>('williamjohnson@example.com')
   const [password, setPassword] = useState<string>('1')
-  const [, forceUpdate] = useReducer(x => x + 1, 0)
 
   if (!showLoginForm.value) {
     return null
@@ -24,8 +23,8 @@ const Login: React.FC = () => {
       setPassword('')
       //rerender this component
       showLoginForm.value = false
-      forceUpdate()
     }
+    // set Error & make inputs show error State
 
     // TODO - Add toast notification
   }
