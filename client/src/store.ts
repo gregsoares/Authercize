@@ -17,7 +17,22 @@ const state = new Signal(userList)
 
 export const showLoginForm = new Signal(false)
 export const showRegisterForm = new Signal(false)
-export const loggedInUser = new Signal(userList.find(users => users.isLoggedIn))
+export const userLoggedIn = new Signal(
+  userList.find(users => users.isLoggedIn) || false
+)
+
+export const loggedInUser = {
+  subscribe: userLoggedIn.subscribe,
+  getUser: () => {
+    return userList.find(user => user.isLoggedIn)
+  },
+  logout: (): boolean => {
+    const user = userList.find(user => user.isLoggedIn)
+    if (!user) return false
+    users.updateIsLoggedIn(user.UUID, false)
+    return true
+  },
+}
 
 export const users = {
   subscribe: state.subscribe,
@@ -50,5 +65,6 @@ export const users = {
   updateIsLoggedIn: (UUID: string, isLoggedIn: boolean) => {
     const index = userList.findIndex(user => user.UUID === UUID)
     userList[index].isLoggedIn = isLoggedIn
+    console.debug('updated userList:', userList)
   },
 }

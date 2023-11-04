@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useReducer } from 'react'
 import Label from '../Label/Label'
 import TextInput from '../TextInput/TextInput'
 import Form from '../FormBuilder/FormBuilder'
@@ -9,6 +9,7 @@ type emailT = '' | string
 const Login: React.FC = () => {
   const [email, setEmail] = useState<emailT>('')
   const [password, setPassword] = useState<string>('')
+  const [, forceUpdate] = useReducer(x => x + 1, 0)
 
   if (!showLoginForm.value) {
     return null
@@ -18,12 +19,18 @@ const Login: React.FC = () => {
     e.preventDefault()
     const loginResponse = login(email, password)
     console.debug('loginResponse', loginResponse)
-    if (!loginResponse.status || loginResponse.status < 400) {
+    if (loginResponse.status === 200) {
       setEmail('')
       setPassword('')
-      // TODO - Add toast notification
+      //rerender this component
+      showLoginForm.value = false
+      forceUpdate()
     }
+
+    // TODO - Add toast notification
   }
+
+  // FIXME: Add Signal dependencies to props
 
   const handleCancelForm = () => {
     setEmail('')

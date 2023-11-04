@@ -3,6 +3,7 @@ import Register from './Components/Register/Register'
 import './App.css'
 import Header from './Components/Header/Header'
 
+// FIXME: Add Signal dependencies to props
 function App() {
   return (
     <div className='App'>
