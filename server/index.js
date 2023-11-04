@@ -86,7 +86,7 @@ app.delete('/api/removeUser/:email', (req, res) => {
     .json({ message: 'User removed and added to deleted accounts' })
 })
 
-const port = process.env.VERCEL_PORT || 9021
+const port = 9021
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })
