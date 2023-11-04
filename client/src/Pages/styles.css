@@ -1,0 +1,13 @@
+/* build a grid using css displaying the following configuration on screen.  */
+/*Make it responsive and adaptive  */
+/* Width should not pass vw so not to create a horizontal scroll bar */
+/* each card should take up min-width of 14em and max of 20em  */
+/* as many cards as it fits wihout going over the screen width */
+
+.profile-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14em, 20em));
+  grid-gap: 1em;
+  padding: 1em;
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,25 @@
+.profile-card {
+  background-color: #444444;
+  border-radius: 10px;
+  padding: 1em;
+  font-size: 1.5em;
+  text-align: center;
+  text-wrap: wrap;
+}
+
+.profile-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.profile-details h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.profile-details p {
+  color: #666;
+  margin: 0;
+}

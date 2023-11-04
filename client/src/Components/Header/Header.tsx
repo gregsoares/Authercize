@@ -1,7 +1,6 @@
-import { useSignal } from '@preact/signals-react'
-import { showLoginForm, showRegisterForm } from '../../store'
+import { showLoginForm, showRegisterForm, userLoggedIn } from '../../store'
 import { fetchAllUsers } from '../../utils/userControls'
-import { logout } from '../../utils/userControls'
+import ProfileHeader from './ProfileHeader'
 
 const menuItems = [
   {
@@ -33,38 +32,21 @@ const toggleRegister = () => {
   showRegisterForm.value = !showRegisterForm.value
 }
 
-const UnidentifiedUser = (): React.ReactElement<HTMLElement> => (
-  <nav>
-    <ul className='menu'>
-      {menuItems.map((item, index) => (
-        <li key={index}>
-          <button onClick={item.handleClick}>{item.title}</button>
-        </li>
-      ))}
-    </ul>
-  </nav>
-)
+const Header = (): React.ReactElement<HTMLElement> => {
+  if (userLoggedIn.value) {
+    return <ProfileHeader userLoggedIn={userLoggedIn.value} />
+  }
 
-const Header = ({ userLoggedIn }) => {
-  const loggedInUser = useSignal(userLoggedIn)
-  console.debug('view::Header::userLoggedIn', userLoggedIn)
-
-  console.debug('view::Header::loggedInUser', loggedInUser)
   return (
-    <header className='app-header'>
-      {userLoggedIn?.UUID ? (
-        <>
-          <section className='header-left'>
-            <h1>{`Welcome ${userLoggedIn?.email}`}</h1>
-          </section>
-          <section className='header-right'>
-            <button onClick={() => logout(userLoggedIn.UUID)}>Logout</button>
-          </section>
-        </>
-      ) : (
-        <UnidentifiedUser />
-      )}
-    </header>
+    <nav>
+      <ul className='menu'>
+        {menuItems.map((item, index) => (
+          <li key={index}>
+            <button onClick={item.handleClick}>{item.title}</button>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }
 

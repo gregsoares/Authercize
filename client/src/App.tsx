@@ -3,11 +3,13 @@ import Register from './Components/Register/Register'
 import './App.css'
 import Header from './Components/Header/Header'
 import { userLoggedIn } from './store'
+import CardList from './Pages/CardList'
 
+// TODO: Make a router/controller to show the correct page based on the user's logged in status
 function App() {
   return (
     <div className='App'>
-      <Header userLoggedIn={userLoggedIn.value} />
+      <Header />
       <main>
         {!userLoggedIn.value ? (
           <section className='app-intro'>
@@ -15,11 +17,7 @@ function App() {
             <p>This is a simple app to demonstrate the use of signals</p>
           </section>
         ) : (
-          <section className='app-landing-page'>
-            <h2>Display user's page here</h2>
-            <p>This is a simple app to demonstrate the use of signals</p>
-            <h3>User is logged in</h3>
-          </section>
+          <CardList />
         )}
         <Login />
         <Register />
