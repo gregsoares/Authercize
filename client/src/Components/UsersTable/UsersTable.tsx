@@ -4,8 +4,8 @@ const UsersTable = (props: UsersTablePropsT) => {
   const { users } = props
 
   console.debug('view::UsersTable::users', users)
-  const checkUserStore = () => {
- 
+  const checkUserStore = () => {}
+
   return (
     <div className='my-16'>
       <h2 className='text-2xl font-semibold mb-4'>Users</h2>
