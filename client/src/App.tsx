@@ -2,7 +2,7 @@ import React from 'react'
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
 import { useStore } from 'effector-react'
-import { $users } from '../../src/store'
+import { $users } from './store'
 import './App.css'
 import { fetchAllUsers } from './utils/userControls'
 

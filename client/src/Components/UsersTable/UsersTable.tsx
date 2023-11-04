@@ -1,7 +1,6 @@
-import { Button } from '../../../../src/stories/Button'
 import type { UserI, UsersTablePropsT } from '../../types'
 import { useStore } from 'effector-react'
-import { $users } from '../../../../src/store'
+import { $users } from '../../store'
 
 const UsersTable = (props: UsersTablePropsT) => {
   const { users } = props
@@ -34,11 +33,7 @@ const UsersTable = (props: UsersTablePropsT) => {
       </table>
       <div>
         {' '}
-        <Button
-          label='Check Store'
-          backgroundColor='gray'
-          onClick={checkUserStore}
-        />{' '}
+        <button onClick={checkUserStore}> {`Check User Store`}</button>
       </div>
     </div>
   )
