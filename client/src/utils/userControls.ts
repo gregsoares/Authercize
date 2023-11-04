@@ -1,3 +1,4 @@
+import { userLoggedIn } from '../store'
 import { users } from '../store'
 
 // const apiUrl = 'http://api.vercel.com/v9/api'
@@ -33,10 +34,11 @@ export const login = (email: string, password: string): ApiResponseT => {
   if (userSecret?.password !== password) {
     return {
       status: 401,
-      message: 'Invalid password',
+      message: 'Invalid credentials',
     }
   }
   users.updateIsLoggedIn(UUID, true)
+  userLoggedIn.value = user
   return {
     status: 200,
     message: 'Login successful',
@@ -45,6 +47,7 @@ export const login = (email: string, password: string): ApiResponseT => {
 
 export const logout = (UUID: string) => {
   users.updateIsLoggedIn(UUID, false)
+  userLoggedIn.value = false
 }
 
 export const registerUser = (email = '', password = ''): ApiResponseT => {
@@ -52,6 +55,14 @@ export const registerUser = (email = '', password = ''): ApiResponseT => {
     return {
       status: 400,
       message: 'Email and password required',
+    }
+  }
+  //check if user already exists
+  const user = users.getUserList().find(user => user.email === email)
+  if (user) {
+    return {
+      status: 409,
+      message: 'User already exists',
     }
   }
   const UUID = Math.random().toString(36).substring(7)

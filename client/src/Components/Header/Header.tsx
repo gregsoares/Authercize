@@ -1,5 +1,8 @@
-import { loggedInUser, showLoginForm, showRegisterForm } from '../../store'
+import { useSignal } from '@preact/signals-react'
+import { showLoginForm, showRegisterForm } from '../../store'
 import { fetchAllUsers } from '../../utils/userControls'
+import { logout } from '../../utils/userControls'
+
 const menuItems = [
   {
     title: 'Login',
@@ -30,7 +33,7 @@ const toggleRegister = () => {
   showRegisterForm.value = !showRegisterForm.value
 }
 
-const unidentifiedUser = () => (
+const UnidentifiedUser = (): React.ReactElement<HTMLElement> => (
   <nav>
     <ul className='menu'>
       {menuItems.map((item, index) => (
@@ -42,24 +45,24 @@ const unidentifiedUser = () => (
   </nav>
 )
 
-// FIXME: Add Signal dependencies to props
+const Header = ({ userLoggedIn }) => {
+  const loggedInUser = useSignal(userLoggedIn)
+  console.debug('view::Header::userLoggedIn', userLoggedIn)
 
-const Header = () => {
-  console.debug('view::Header::loggedInUser', loggedInUser.getUser())
+  console.debug('view::Header::loggedInUser', loggedInUser)
   return (
     <header className='app-header'>
-      {loggedInUser.getUser() ? (
+      {userLoggedIn?.UUID ? (
         <>
-          {/* //2 header sections, one takes up 70% vw, the other displays a button aligned right */}
           <section className='header-left'>
-            <h1>{`Welcome ${loggedInUser.getUser()?.email}`}</h1>
+            <h1>{`Welcome ${userLoggedIn?.email}`}</h1>
           </section>
           <section className='header-right'>
-            <button onClick={() => loggedInUser.logout()}>Logout</button>
+            <button onClick={() => logout(userLoggedIn.UUID)}>Logout</button>
           </section>
         </>
       ) : (
-        unidentifiedUser()
+        <UnidentifiedUser />
       )}
     </header>
   )

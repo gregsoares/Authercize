@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
 import { registerUser } from '../../utils/userControls'
 import { showRegisterForm } from '../../store'
+import { signal } from '@preact/signals-react'
+
+const email = signal('')
+const password = signal('')
 
 const Register: React.FC = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-
   if (!showRegisterForm.value) {
     return null
   }
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
-    const registrationStatus = await registerUser(email, password)
+    const registrationStatus = await registerUser(email.value, password.value)
     if (registrationStatus === void 0 || !registrationStatus) {
       return
     }
-    setEmail('')
-    setPassword('')
+    email.value = ''
+    password.value = ''
     console.debug('registrationStatus', registrationStatus)
   }
 
@@ -34,8 +34,8 @@ const Register: React.FC = () => {
             id='email'
             className='w-full p-2 border rounded'
             placeholder='Email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            value={email.value}
+            onChange={e => (email.value = e.target.value)}
           />
         </div>
         <div className='mb-4'>
@@ -47,8 +47,8 @@ const Register: React.FC = () => {
             id='password'
             className='w-full p-2 border rounded'
             placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            value={password.value}
+            onChange={e => (password.value = e.target.value)}
           />
         </div>
         <button

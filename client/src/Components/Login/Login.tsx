@@ -7,8 +7,8 @@ import { showLoginForm } from '../../store'
 
 type emailT = '' | string
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<emailT>('')
-  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<emailT>('williamjohnson@example.com')
+  const [password, setPassword] = useState<string>('1')
   const [, forceUpdate] = useReducer(x => x + 1, 0)
 
   if (!showLoginForm.value) {
@@ -29,9 +29,6 @@ const Login: React.FC = () => {
 
     // TODO - Add toast notification
   }
-
-  // FIXME: Add Signal dependencies to props
-
   const handleCancelForm = () => {
     setEmail('')
     setPassword('')
