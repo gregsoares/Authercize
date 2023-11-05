@@ -1,6 +1,7 @@
 import { showLoginForm, showRegisterForm, userLoggedIn } from '../../store'
 import { fetchAllUsers } from '../../utils/userControls'
 import ProfileHeader from './ProfileHeader'
+import './styles.css'
 
 const menuItems = [
   {

@@ -3,36 +3,6 @@
   margin: 0;
 }
 
-.app-header {
-  width: 100%;
-  background-color: #282c34;
-  padding: 1em 0;
-  color: white;
-  margin: 0;
-}
-
-.menu {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.menu li {
-  margin: 0 20px;
-}
-
-.menu a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-}
-
-main {
-  padding: 20px;
-}
-
 h1 {
   font-size: 2rem;
   margin-bottom: 10px;

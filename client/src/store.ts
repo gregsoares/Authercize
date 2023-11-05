@@ -1,5 +1,10 @@
 import { Signal } from '@preact/signals-react'
 import { staticUserList, staticUserSecretList } from './constants/userList.js'
+import staticProfileList from './constants/staticProfileList.js'
+
+// useTraverseArray exports
+export const currentSection = new Signal(staticProfileList.slice(0, 25))
+export const isFinished = new Signal(false)
 
 type UserSecretT = { UUID: string; email: string; password: string }
 const userSecret: UserSecretT[] = [...staticUserSecretList]
@@ -14,7 +19,6 @@ type UserT = {
 
 const userList: UserT[] = [...staticUserList]
 const state = new Signal(userList)
-
 export const showLoginForm = new Signal(false)
 export const showRegisterForm = new Signal(false)
 export const userLoggedIn = new Signal(
@@ -52,6 +56,6 @@ export const users = {
   updateIsLoggedIn: (UUID: string, isLoggedIn: boolean) => {
     const index = userList.findIndex(user => user.UUID === UUID)
     userList[index].isLoggedIn = isLoggedIn
-    console.debug('updated userList:', userList)
+    console.debug('updated user:', userList[index])
   },
 }

@@ -1,0 +1,43 @@
+.app-header {
+  width: 100%;
+  background-color: #282c34;
+  padding: 1em 0;
+  color: white;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.header-left {
+  display: inline-block;
+  justify-content: space-between;
+  align-items: start;
+  padding: 1em;
+}
+
+.header-right {
+  display: inline-block;
+  align-items: end;
+  padding: 1em;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.menu li {
+  margin: 0 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+main {
+  padding: 20px;
+}
