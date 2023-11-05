@@ -6,7 +6,7 @@ const email = signal('')
 const password = signal('')
 
 const Register: React.FC = () => {
-  if (userLoggedIn.value || showRegisterForm.value) {
+  if (userLoggedIn.value || !showRegisterForm.value) {
     return null
   }
   const handleRegister = async (e: React.FormEvent) => {

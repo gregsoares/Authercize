@@ -1,7 +1,6 @@
-import React from 'react'
-import ProfileCard from '../../Components/ProfileCard/ProfileCard'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+// import ProfileCard from '../ProfileCard/ProfileCard'
 import './styles.css'
-
 interface User {
   UUID: string
   name: string
@@ -17,7 +16,16 @@ const ProfileList: React.FC<{ users: User[] }> = ({ users }) => {
   return (
     <div className='profile-list-grid'>
       {users.map(user => (
-        <ProfileCard key={user.UUID} user={user} />
+        <LazyLoadImage
+          key={user.UUID}
+          src={user.image}
+          alt={user.name}
+          loading='lazy'
+          effect='blur'
+          wrapperClassName='profile-list-grid-item'
+          placeholder={<p>Loading...</p>}
+          placeholderSrc='https://via.placeholder.com/150'
+        />
       ))}
     </div>
   )

@@ -6,8 +6,8 @@ import { login } from '../../utils/userControls'
 import { showLoginForm } from '../../store'
 
 const Login: React.FC = () => {
-  const email = useSignal('')
-  const password = useSignal('')
+  const email = useSignal('johnsmith@example.com')
+  const password = useSignal('1')
 
   if (!showLoginForm.value) {
     return null
