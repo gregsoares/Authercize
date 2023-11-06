@@ -1,4 +1,3 @@
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import './styles.css'
 
 interface ProfileCardProps {
@@ -11,7 +10,6 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
-  //make a const to display current time down to miliseconds with 3 digits
   const time = new Date().toLocaleTimeString('en-US', {
     hour12: false,
     hour: 'numeric',
@@ -21,12 +19,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
 
   return (
     <div className='profile-card'>
-      <LazyLoadImage
-        src={user.image}
-        alt={user.name}
-        placeholder={<div>Loading ...</div>}
-        placeholderSrc='https://via.placeholder.com/50'
-      />
+      <img src={user.image} alt='profile' />
+
       <div className='profile-details'>
         <h2>{user.name}</h2>
         <p>{user.email}</p>

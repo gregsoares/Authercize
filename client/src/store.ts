@@ -3,7 +3,9 @@ import { staticUserList, staticUserSecretList } from './constants/userList.js'
 import staticProfileList from './constants/staticProfileList.js'
 
 // useTraverseArray exports
-export const currentSection = new Signal(staticProfileList.slice(0, 25))
+export const profileList = new Signal(staticProfileList)
+export const usersPerPage = new Signal(25)
+export const currentPage = new Signal(1)
 export const isFinished = new Signal(false)
 
 type UserSecretT = { UUID: string; email: string; password: string }

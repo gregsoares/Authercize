@@ -5,3 +5,11 @@
   padding: 1em;
   background-color: #f0f0f0;
 }
+
+/* {make a button that always stays on the top right even when user is scrolling} */
+.next-page {
+  position: fixed;
+  top: 2em;
+  right: 2em;
+  z-index: 1;
+}
