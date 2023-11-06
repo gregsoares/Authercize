@@ -11,10 +11,6 @@ type ApiResponseT = {
 }
 
 export const fetchAllUsers = (): ApiResponseT => {
-  const allUsers = users.getUserList()
-  const allUserSecrets = users.getUserSecretList()
-  console.debug('allUsers', allUsers)
-  console.debug('allUserSecrets', allUserSecrets)
   return {
     status: 200,
     message: 'All users returned',
@@ -78,8 +74,6 @@ export const registerUser = (email = '', password = ''): ApiResponseT => {
     email,
     password,
   })
-  console.debug('Registered Users::', users.getUserList())
-  console.debug('Registered Users::', users.getUserSecretList())
   return {
     status: 200,
     message: 'User created',

@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 import './styles.css'
 import ProfileCard from '../ProfileCard/ProfileCard'
 import paginateUsers from '../../hooks/paginateUsers'
-import { Signal } from '@preact/signals-react'
-import { useWindowScroll, useWindowSize } from 'react-use'
+import { useWindowScroll } from 'react-use'
 
 // TODO: implement lazy loading
 // TODO: implement a way to sort the users by name
 // TODO: implement a way to search for users
-const halfWindowHeight = new Signal(window.innerHeight / 2)
 
 const ProfileList: React.FC = () => {
   const {
@@ -23,12 +21,6 @@ const ProfileList: React.FC = () => {
   } = paginateUsers()
   const [displayUsers, setDisplayUsers] = useState([...currentUsers])
   const { y: currentWindowLocation } = useWindowScroll()
-  console.debug('Height from document.body', document.body.clientHeight)
-  console.debug('currentWindowLocation', currentWindowLocation)
-  console.debug(
-    'Load more when window location passes: ',
-    currentWindowLocation > document.body.clientHeight - window.innerHeight
-  )
 
   const isNearBottom = (): boolean => {
     if (
