@@ -7,9 +7,10 @@ interface ProfileCardProps {
     email: string
     image: string
   }
+  key: string
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ user, key }) => {
   const time = new Date().toLocaleTimeString('en-US', {
     hour12: false,
     hour: 'numeric',
@@ -18,7 +19,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
   })
 
   return (
-    <div className='profile-card'>
+    <div className='profile-card' key={key}>
       <img src={user.image} alt='profile' />
 
       <div className='profile-details'>
