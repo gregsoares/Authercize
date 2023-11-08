@@ -1,27 +1,46 @@
-# React + TypeScript + Vite
+# User Registration and Login Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+This web application is designed to provide a user-friendly registration and login experience with an underlying focus on security and performance optimization. It showcases various software engineering skills and features, including user input validation, API integration, infinite scroll, lazy loading, and token-based authentication.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Features
 
-## Expanding the ESLint configuration
+1. **User Registration and Login**: The application offers a user-friendly registration and login form for new and existing users.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. **Input Validation**: Utility functions ensure that user input is properly validated, enhancing the security of the application.
 
-- Configure the top-level `parserOptions` property like this:
+3. **API Integration**: All data in the application is sourced from APIs. User authentication is a prerequisite for accessing API data, establishing a secure connection.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+4. **Infinite Scroll and Lazy Loading**: To be more user-friendly and enhance performance, the application implements infinite scroll and lazy loading when displaying a sizeable user list.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+5. **Token-Based Authentication**: The application employs basic access token verification on both the front-end and back-end, enhancing security during API interactions.
+
+### Technology Stack
+
+**Front-end**:
+
+- React
+- Typescript
+- preact-signals
+
+**Back-end**:
+
+- Node
+- Express
+
+## Backend Details
+
+The backend of this application includes custom API endpoints responsible for data retrieval and pagination, as well as handling login and registration actions. Key backend features include:
+
+- **Authentication**: The application ensures that the user provides valid credentials before granting access, enhancing security. It communicates the authentication status to the front-end.
+
+- **Custom API Endpoints**: The API endpoints are tailored to retrieve data and paginated data as needed, offering efficient access to information.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
+
+Feel free to reach out if you have any questions or need further information about this web application.
+
+### Project Summary
